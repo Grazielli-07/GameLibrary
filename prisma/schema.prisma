@@ -1,0 +1,64 @@
+
+generator client {
+  provider               = "prisma-client"
+  output                 = "../src/generated/prisma"
+  moduleFormat           = "esm"
+  generatedFileExtension = "ts"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  name      String
+  email     String     @unique
+  password  String
+  createdAt DateTime   @default(now())
+  library   UserGame[]
+}
+
+model Genre {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  games Game[]
+}
+
+model Platform {
+  id    Int            @id @default(autoincrement())
+  name  String         @unique
+  games GamePlatform[]
+}
+
+model Game {
+  id          Int            @id @default(autoincrement())
+  title       String
+  description String?
+  releaseYear Int?
+  genreId     Int
+  genre       Genre          @relation(fields: [genreId], references: [id])
+  platforms   GamePlatform[]
+  users       UserGame[]
+}
+
+model UserGame {
+  id      Int      @id @default(autoincrement())
+  userId  Int
+  gameId  Int
+  addedAt DateTime @default(now())
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game    Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, gameId])
+}
+
+model GamePlatform {
+  id         Int      @id @default(autoincrement())
+  gameId     Int
+  platformId Int
+  game       Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  platform   Platform @relation(fields: [platformId], references: [id], onDelete: Cascade)
+
+  @@unique([gameId, platformId])
+}

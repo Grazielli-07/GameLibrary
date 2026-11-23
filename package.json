@@ -1,0 +1,26 @@
+{
+  "name": "gamelibrary-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "API REST de biblioteca gamer com Express, Prisma, Neon e JWT",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
+  },
+  "dependencies": {
+    "@prisma/adapter-neon": "7.10.0",
+    "@prisma/client": "7.10.0",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "prisma": "7.10.0"
+  }
+}
