@@ -262,18 +262,6 @@ O banco também utiliza exclusão em cascata nos relacionamentos configurados co
 - Cada usuário pode consultar e modificar apenas os vínculos da própria biblioteca.
 - Os jogos, gêneros e plataformas são recursos compartilhados entre os usuários autenticados.
 - O arquivo `.env` e a pasta `node_modules` devem permanecer fora do repositório GitHub.
-
-## 10. Roteiro para apresentação
-
-Sugestão de sequência para demonstrar o funcionamento da API:
-
-1. Acessar `GET /games` sem token e demonstrar o retorno HTTP 401.
-2. Cadastrar um usuário através de `/auth/register`.
-3. Realizar login em `/auth/login` e obter o token JWT.
-4. Cadastrar um gênero em `/genres`.
-5. Cadastrar uma plataforma em `/platforms`.
-6. Cadastrar um jogo em `/games`, associando gênero e plataforma.
-7. Consultar o jogo em `/games/:id`.
 8. Adicionar o jogo à biblioteca em `/library/:gameId`.
 9. Consultar `/library` para demonstrar o relacionamento N:N.
 10. Consultar `/auth/me` para demonstrar a autenticação do usuário.
